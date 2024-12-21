@@ -1,12 +1,15 @@
-import React from 'react';
-import ProgrammerRoadmap from './pages';
+// src/App.tsx
+import { Routes, Route } from 'react-router-dom';
+import ProgrammerRoadmap from './pages/programmerRoadMap';
+import CareerIntroPage from './pages/careerIntroduce';
 
-const App: React.FC = () => {
+function App() {
   return (
-    <div>
-      <ProgrammerRoadmap />
-    </div>
+    <Routes>
+      <Route path="/" element={<ProgrammerRoadmap />} />
+      <Route path="/career/:slug" element={<CareerIntroPage />} />
+    </Routes>
   );
-};
+}
 
 export default App;
