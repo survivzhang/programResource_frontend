@@ -1,5 +1,6 @@
 // src/pages/career/[slug].tsx
 import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import {
   Container,
   Box,
@@ -8,89 +9,115 @@ import {
   ListItem,
   ListItemText,
   Button,
+  Tabs,
+  Tab,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { careerPaths } from '../data/careerData';
 
 const CareerIntroPage: React.FC = () => {
-  const { slug } = useParams(); // 使用 useParams 替代 useRouter
-  const navigate = useNavigate(); // 用于返回功能
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const [currentTab, setCurrentTab] = useState('introduce');
 
   const career = careerPaths.find((path) => path.slug === slug);
-
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: string) => {
+    setCurrentTab(newValue);
+  };
   if (!career) {
-    return (
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Typography variant="h5" align="center">
-          未找到该职业路径
-        </Typography>
-        <Box sx={{ textAlign: 'center', mt: 2 }}>
-          <Button
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/')}
-            variant="contained"
-          >
-            返回首页
-          </Button>
-        </Box>
-      </Container>
-    );
+    return <Typography variant="h5">Career not found</Typography>;
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      {/* 返回按钮 */}
-      <Button
-        startIcon={<ArrowBackIcon />}
-        onClick={() => navigate('/')}
-        sx={{ mb: 3 }}
-      >
-        返回
-      </Button>
+    <>
+      {/* 标题区域 */}
+      <Box sx={{ bgcolor: career.bgcolor, minHeight: '200px' }}>
+        <Container maxWidth="lg" sx={{ py: 3 }}>
+          <Button
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate('/')}
+            sx={{ color: 'black', mb: 2 }}
+          >
+            返回
+          </Button>
+          <Typography variant="h3" component="h1">
+            {career.title}
+          </Typography>
+        </Container>
+      </Box>
 
-      <Box sx={{ bgcolor: career.bgcolor, p: 3, borderRadius: 2 }}>
-        {/* 标题 */}
-        <Typography variant="h3" component="h1">
-          {career.title}
-        </Typography>
-
-        {/* 描述 */}
+      {/* 导航栏和内容区域 */}
+      <Container maxWidth="lg" sx={{ mt: -5 }}>
         <Box
           sx={{
-            bgcolor: 'rgba(255,255,255,0.9)',
-            p: 3,
-            mt: 3,
-            borderRadius: 1,
+            bgcolor: 'white',
+            borderRadius: '8px',
+            boxShadow: 1,
+            overflow: 'hidden',
           }}
         >
-          <Typography variant="body1">{career.description}</Typography>
+          {/* 添加导航栏 */}
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs
+              value={currentTab}
+              onChange={handleTabChange}
+              sx={{
+                '& .MuiTab-root': {
+                  fontWeight: 'bold',
+                  fontSize: '1rem',
+                },
+              }}
+            >
+              <Tab label="INTRODUCE" value="introduce" />
+              <Tab label="PATH" value="path" />
+              <Tab label="REFERENCE" value="reference" />
+              <Tab label="JOB opportunity" value="job" />
+            </Tabs>
+          </Box>
 
-          {/* 技能列表 */}
-          <Typography variant="h5" sx={{ mt: 4 }}>
-            核心技能
-          </Typography>
-          <List>
-            {career.skills.map((skill, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={skill} />
-              </ListItem>
-            ))}
-          </List>
-
-          {/* 学习路线 */}
-          <Typography variant="h5" sx={{ mt: 4 }}>
-            学习路线
-          </Typography>
-          <List>
-            {career.roadmap.map((step, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={`${index + 1}. ${step}`} />
-              </ListItem>
-            ))}
-          </List>
+          {/* 内容区域 */}
+          <Box sx={{ p: 3 }}>
+            {currentTab === 'introduce' && (
+              <>
+                <Typography variant="body1" paragraph>
+                  {career.description}
+                </Typography>
+                <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
+                  核心技能
+                </Typography>
+                <List>
+                  {career.skills.map((skill, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={skill} />
+                    </ListItem>
+                  ))}
+                </List>
+              </>
+            )}
+            {currentTab === 'path' && (
+              <>
+                <Typography variant="h5" sx={{ mb: 2 }}>
+                  学习路线
+                </Typography>
+                <List>
+                  {career.roadmap.map((step, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={`${index + 1}. ${step}`} />
+                    </ListItem>
+                  ))}
+                </List>
+              </>
+            )}
+            {currentTab === 'reference' && (
+              <Typography>参考资料区域（待完善）</Typography>
+            )}
+            {currentTab === 'job' && (
+              <Typography>工作机会区域（待完善）</Typography>
+            )}
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </>
   );
 };
 

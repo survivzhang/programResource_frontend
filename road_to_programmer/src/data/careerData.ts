@@ -24,6 +24,14 @@ export const careerPaths: CareerPath[] = [
       '学习构建工具和工程化',
       '掌握性能优化技巧',
     ],
+    references: ['前端开发者手册', 'MDN Web Docs', 'React 官方文档'],
+    jobs: [
+      {
+        title: '高级前端工程师',
+        company: 'TechCo',
+        location: '上海',
+      },
+    ],
   },
   {
     id: 2,
@@ -34,6 +42,14 @@ export const careerPaths: CareerPath[] = [
       '数据工程师专注于构建和维护数据基础设施，确保数据的高效处理和存储。',
     skills: ['SQL', 'Python', 'ETL', 'Big Data Tools', 'Data Warehousing'],
     roadmap: ['掌握 SQL', '学习 Python', '了解数据仓库', '掌握 ETL 流程'],
+    references: ['前端开发者手册', 'MDN Web Docs', 'React 官方文档'],
+    jobs: [
+      {
+        title: '高级前端工程师',
+        company: 'TechCo',
+        location: '上海',
+      },
+    ],
   },
   {
     id: 3,
@@ -58,6 +74,14 @@ export const careerPaths: CareerPath[] = [
       '了解网络协议',
       '学习系统设计',
       '实践微服务架构',
+    ],
+    references: ['前端开发者手册', 'MDN Web Docs', 'React 官方文档'],
+    jobs: [
+      {
+        title: '高级前端工程师',
+        company: 'TechCo',
+        location: '上海',
+      },
     ],
   },
   {
@@ -84,6 +108,14 @@ export const careerPaths: CareerPath[] = [
       '提升数据讲述能力',
       '了解机器学习基础',
     ],
+    references: ['前端开发者手册', 'MDN Web Docs', 'React 官方文档'],
+    jobs: [
+      {
+        title: '高级前端工程师',
+        company: 'TechCo',
+        location: '上海',
+      },
+    ],
   },
   {
     id: 5,
@@ -109,6 +141,14 @@ export const careerPaths: CareerPath[] = [
       '掌握自动化工具',
       '学习系统监控',
     ],
+    references: ['前端开发者手册', 'MDN Web Docs', 'React 官方文档'],
+    jobs: [
+      {
+        title: '高级前端工程师',
+        company: 'TechCo',
+        location: '上海',
+      },
+    ],
   },
   {
     id: 6,
@@ -133,6 +173,14 @@ export const careerPaths: CareerPath[] = [
       '学习深度学习',
       '实践数据建模',
       '培养业务理解力',
+    ],
+    references: ['前端开发者手册', 'MDN Web Docs', 'React 官方文档'],
+    jobs: [
+      {
+        title: '高级前端工程师',
+        company: 'TechCo',
+        location: '上海',
+      },
     ],
   },
   // ... 其他职业路径数据
