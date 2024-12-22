@@ -1,5 +1,6 @@
 // src/data/careerData.ts
 import { CareerPath } from '../pages/types';
+
 import {
   frontendReferences,
   backendReferences,
@@ -29,13 +30,6 @@ export const careerPaths: CareerPath[] = [
       '掌握性能优化技巧',
     ],
     references: frontendReferences,
-    jobs: [
-      {
-        title: '高级前端工程师',
-        company: 'TechCo',
-        location: '上海',
-      },
-    ],
   },
   {
     id: 2,
@@ -47,13 +41,6 @@ export const careerPaths: CareerPath[] = [
     skills: ['SQL', 'Python', 'ETL', 'Big Data Tools', 'Data Warehousing'],
     roadmap: ['掌握 SQL', '学习 Python', '了解数据仓库', '掌握 ETL 流程'],
     references: devopsReferences,
-    jobs: [
-      {
-        title: '高级前端工程师',
-        company: 'TechCo',
-        location: '上海',
-      },
-    ],
   },
   {
     id: 3,
@@ -80,13 +67,6 @@ export const careerPaths: CareerPath[] = [
       '实践微服务架构',
     ],
     references: backendReferences,
-    jobs: [
-      {
-        title: '高级前端工程师',
-        company: 'TechCo',
-        location: '上海',
-      },
-    ],
   },
   {
     id: 4,
@@ -113,13 +93,6 @@ export const careerPaths: CareerPath[] = [
       '了解机器学习基础',
     ],
     references: devopsReferences,
-    jobs: [
-      {
-        title: '高级前端工程师',
-        company: 'TechCo',
-        location: '上海',
-      },
-    ],
   },
   {
     id: 5,
@@ -146,13 +119,6 @@ export const careerPaths: CareerPath[] = [
       '学习系统监控',
     ],
     references: devopsReferences,
-    jobs: [
-      {
-        title: '高级前端工程师',
-        company: 'TechCo',
-        location: '上海',
-      },
-    ],
   },
   {
     id: 6,
@@ -179,13 +145,6 @@ export const careerPaths: CareerPath[] = [
       '培养业务理解力',
     ],
     references: devopsReferences,
-    jobs: [
-      {
-        title: '高级前端工程师',
-        company: 'TechCo',
-        location: '上海',
-      },
-    ],
   },
   // ... 其他职业路径数据
 ];

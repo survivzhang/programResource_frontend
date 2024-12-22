@@ -15,6 +15,7 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { careerPaths } from '../data/careerData';
 import ReferenceContent from '../components/referenceContent';
+import JobOpportunityContent from '../components/jobOpportunity';
 
 const CareerIntroPage: React.FC = () => {
   const { slug } = useParams();
@@ -77,7 +78,15 @@ const CareerIntroPage: React.FC = () => {
           </Box>
 
           {/* 内容区域 */}
-          <Box sx={{ p: 3 }}>
+          <Box
+            sx={{
+              p: 3,
+              height: '600px', // 固定高度
+              width: '100%', // 占满容器宽度
+              minWidth: '1200px', // 最小宽度
+              overflow: 'auto',
+            }}
+          >
             {currentTab === 'introduce' && (
               <>
                 <Typography variant="body1" paragraph>
@@ -116,7 +125,16 @@ const CareerIntroPage: React.FC = () => {
               />
             )}
             {currentTab === 'job' && (
-              <Typography>工作机会区域（待完善）</Typography>
+              <JobOpportunityContent
+                career={career}
+                bgcolor={career.bgcolor}
+                onViewSalary={(country, city) => {
+                  navigate(`/career/${career.slug}/salary/${country}/${city}`);
+                }}
+                onViewMarket={(country, city) => {
+                  navigate(`/career/${career.slug}/market/${country}/${city}`);
+                }}
+              />
             )}
           </Box>
         </Box>
