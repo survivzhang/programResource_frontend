@@ -1,4 +1,18 @@
-// types.ts
+// src/types.ts
+
+// 基础类型定义
+export interface CourseType {
+  course: string[];
+  books: string[];
+  projects: string[];
+}
+
+// 参考资料结构
+export interface ReferenceData {
+  [technology: string]: CourseType;
+}
+
+// 职业路径定义
 export interface CareerPath {
   id: number;
   title: string;
@@ -7,14 +21,15 @@ export interface CareerPath {
   description: string;
   skills: string[];
   roadmap: string[];
-  references?: string[]; // 新增：参考资料
+  references: ReferenceData;
   jobs?: {
-    // 新增：工作机会
     title: string;
     company: string;
     location: string;
   }[];
 }
+
+// 卡片属性定义
 export interface CareerCardProps {
   title: string;
   bgcolor: string;
