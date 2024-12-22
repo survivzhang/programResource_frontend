@@ -27,6 +27,9 @@ export interface CareerPath {
     company: string;
     location: string;
   }[];
+  jobLocations: JobLocation[];
+  salaryData: SalaryData[];
+  jobMarketData: JobMarketData[];
 }
 
 // 卡片属性定义
@@ -34,4 +37,24 @@ export interface CareerCardProps {
   title: string;
   bgcolor: string;
   onClick: () => void;
+}
+
+export interface JobLocation {
+  country: string;
+  cities: string[];
+}
+
+export interface JobMarketData {
+  location: string;
+  trends: string[];
+  demandLevel: string;
+  growthRate: string;
+}
+
+export interface SalaryData {
+  location: string;
+  junior: string;
+  middle: string;
+  senior: string;
+  average: string;
 }

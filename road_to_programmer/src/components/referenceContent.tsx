@@ -42,26 +42,28 @@ const ReferenceContent: React.FC<ReferenceContentProps> = ({
         }}
       >
         <List>
-{Object.keys(references).map((tech) => (
-  <ListItem key={tech} disablePadding>  {/* 修改这里 */}
-    <ListItemButton     {/* 使用 ListItemButton 替代之前的 button 属性 */}
-      onClick={() => setSelectedTech(tech)}
-      selected={selectedTech === tech}
-      sx={{
-        borderRadius: 1,
-        mb: 1,
-        '&.Mui-selected': {
-          bgcolor: `${bgcolor}40`,
-          '&:hover': {
-            bgcolor: `${bgcolor}60`
-          }
-        }
-      }}
-    >
-      <ListItemText primary={tech} />
-    </ListItemButton>
-  </ListItem>
-))}
+          {Object.keys(references).map((tech) => (
+            <ListItem key={tech} disablePadding>
+              {' '}
+              {/* 修改这里 */}
+              <ListItemButton
+                onClick={() => setSelectedTech(tech)}
+                selected={selectedTech === tech}
+                sx={{
+                  borderRadius: 1,
+                  mb: 1,
+                  '&.Mui-selected': {
+                    bgcolor: `${bgcolor}40`,
+                    '&:hover': {
+                      bgcolor: `${bgcolor}60`,
+                    },
+                  },
+                }}
+              >
+                <ListItemText primary={tech} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </Box>
 

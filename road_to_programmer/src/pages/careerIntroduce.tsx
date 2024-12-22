@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { careerPaths } from '../data/careerData';
+import ReferenceContent from '../components/referenceContent';
 
 const CareerIntroPage: React.FC = () => {
   const { slug } = useParams();
@@ -108,8 +109,11 @@ const CareerIntroPage: React.FC = () => {
                 </List>
               </>
             )}
-            {currentTab === 'reference' && (
-              <Typography>参考资料区域（待完善）</Typography>
+            {currentTab === 'reference' && career.references && (
+              <ReferenceContent
+                references={career.references}
+                bgcolor={career.bgcolor}
+              />
             )}
             {currentTab === 'job' && (
               <Typography>工作机会区域（待完善）</Typography>
