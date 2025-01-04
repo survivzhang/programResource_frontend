@@ -1,5 +1,3 @@
-// src/types.ts
-
 // 基础类型定义
 export interface JobLocation {
   country: string;
