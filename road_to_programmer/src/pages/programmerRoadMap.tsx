@@ -37,6 +37,7 @@ const ProgrammerRoadmap: React.FC = () => {
               title={path.title}
               bgcolor={path.bgcolor}
               onClick={() => handleCardClick(path.slug)}
+              ratings={path.ratings}
             />
           </Grid>
         ))}

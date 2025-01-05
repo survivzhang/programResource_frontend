@@ -41,6 +41,7 @@ export interface CareerPath {
   skills: string[];
   roadmap: string[];
   references: ReferenceData;
+  ratings: CareerRatings;
 }
 
 // 卡片属性定义
@@ -48,4 +49,27 @@ export interface CareerCardProps {
   title: string;
   bgcolor: string;
   onClick: () => void;
+  ratings: CareerRatings;
+}
+
+// 评分系统相关类型
+export interface RatingComponentProps {
+  value: number;
+  maxStars?: number;
+  size?: number;
+  color?: string;
+}
+
+export interface CareerRatings {
+  difficulty: number;
+  salary: number;
+  demand: number;
+  stability: number;
+  futureProspect: number;
+}
+
+export interface RatingConfig {
+  label: string;
+  value: number;
+  color: string;
 }

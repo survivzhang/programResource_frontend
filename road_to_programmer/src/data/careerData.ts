@@ -29,6 +29,13 @@ export const careerPaths: CareerPath[] = [
       '学习构建工具和工程化',
       '掌握性能优化技巧',
     ],
+    ratings: {
+      difficulty: 4, // 需要较强的技术背景
+      salary: 4, // 薪资较高
+      demand: 4, // 需求稳定
+      stability: 4, // 就业稳定
+      futureProspect: 5, // 发展前景很好
+    },
     references: frontendReferences,
   },
   {
@@ -41,6 +48,13 @@ export const careerPaths: CareerPath[] = [
     skills: ['SQL', 'Python', 'ETL', 'Big Data Tools', 'Data Warehousing'],
     roadmap: ['掌握 SQL', '学习 Python', '了解数据仓库', '掌握 ETL 流程'],
     references: devopsReferences,
+    ratings: {
+      difficulty: 3, // 入门相对容易
+      salary: 4, // 薪资较高
+      demand: 5, // 市场需求很大
+      stability: 4, // 就业相对稳定
+      futureProspect: 4, // 发展前景好
+    },
   },
   {
     id: 3,
@@ -66,6 +80,13 @@ export const careerPaths: CareerPath[] = [
       '学习系统设计',
       '实践微服务架构',
     ],
+    ratings: {
+      difficulty: 4, // 技术要求较高
+      salary: 4, // 薪资较高
+      demand: 5, // 市场需求大
+      stability: 5, // 就业非常稳定
+      futureProspect: 5, // 发展前景很好
+    },
     references: backendReferences,
   },
   {
@@ -92,6 +113,14 @@ export const careerPaths: CareerPath[] = [
       '提升数据讲述能力',
       '了解机器学习基础',
     ],
+    ratings: {
+      difficulty: 3, // 入门难度适中
+      salary: 3, // 薪资中等
+      demand: 4, // 需求较大
+      stability: 4, // 较为稳定
+      futureProspect: 4, // 发展前景好
+    },
+
     references: devopsReferences,
   },
   {
@@ -119,6 +148,13 @@ export const careerPaths: CareerPath[] = [
       '学习系统监控',
     ],
     references: devopsReferences,
+    ratings: {
+      difficulty: 5, // 技术难度大
+      salary: 5, // 薪资很高
+      demand: 4, // 需求较大
+      stability: 4, // 较为稳定
+      futureProspect: 5, // 发展前景很好
+    },
   },
   {
     id: 6,
@@ -145,6 +181,13 @@ export const careerPaths: CareerPath[] = [
       '培养业务理解力',
     ],
     references: devopsReferences,
+    ratings: {
+      difficulty: 5, // 技术要求高
+      salary: 5, // 薪资很高
+      demand: 4, // 需求较大
+      stability: 4, // 较为稳定
+      futureProspect: 5, // 发展前景很好
+    },
   },
   // ... 其他职业路径数据
 ];
