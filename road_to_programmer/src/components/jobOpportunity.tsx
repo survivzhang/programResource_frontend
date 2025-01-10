@@ -1,5 +1,5 @@
 // src/components/JobOpportunityContent.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   FormControl,
@@ -9,7 +9,30 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import { jobLocations } from '../data/jobData';
+
+interface JobData {
+  job_id: string;
+  employer_name: string;
+  job_title: string;
+  job_city: string;
+  job_state: string;
+  job_country: string;
+  job_posted_at_datetime_utc: string;
+  job_min_salary: number | null;
+  job_max_salary: number | null;
+  job_description: string;
+  qualifications: string[];
+  responsibilities: string[];
+}
+
+interface JobMarketData {
+  newest: JobData[];
+  topTitles: Array<{ job_title: string; average_salary: number }>;
+  topCities: Array<{ city_name: string; average_salary: number }>;
+  topCompanies: Array<{ company_name: string; average_salary: number }>;
+}
+
+const API_BASE_URL = 'http://localhost:5001/api/job_market';
 
 interface JobOpportunityContentProps {
   onViewSalary: (country: string, city: string) => void;
@@ -19,7 +42,6 @@ interface JobOpportunityContentProps {
     slug: string;
   };
 }
-
 const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
   onViewSalary,
   onViewMarket,
@@ -28,11 +50,41 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
 }) => {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [marketData, setMarketData] = useState<JobMarketData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // 从 jobData 获取当前职业的地区数据
-  const locations = jobLocations[career.slug] || [];
-  const cities =
-    locations.find((loc) => loc.country === selectedCountry)?.cities || [];
+  const fetchMarketData = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const [newestRes, titleRes, cityRes, companyRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/newest${career.slug ? `?title=${career.slug}` : ''}`),
+        fetch(`${API_BASE_URL}/top_titles`),
+        fetch(`${API_BASE_URL}/top_cities`),
+        fetch(`${API_BASE_URL}/top_companies`),
+      ]);
+      if (!newestRes.ok || !titleRes.ok || !cityRes.ok || !companyRes.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const [newest, topTitles, topCities, topCompanies] = await Promise.all([
+        newestRes.json(),
+        titleRes.json(),
+        cityRes.json(),
+        companyRes.json(),
+      ]);
+      setMarketData({
+        newest,
+        topTitles,
+        topCities,
+        topCompanies,
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('Error fetching market data:', err);
+    }finally {
+      setIsLoading(false);
+    }
 
   return (
     <Box sx={{ p: 3 }}>
