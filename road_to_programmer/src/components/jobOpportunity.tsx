@@ -227,83 +227,73 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
         </Grid>
       </Grid>
 
-      {/* Market Stats - Top 3 High Salary Cities from Newest Jobs */}
-      <Grid container spacing={2} sx={{ mb: 4 }}>
-        {marketData?.newest
-          .sort((a, b) => (b.job_max_salary ?? 0) - (a.job_max_salary ?? 0))
-          .slice(0, 3)
-          .map((job, index) => (
-            <Grid item xs={12} sm={4} key={job.job_city}>
-              <Typography variant="subtitle2" color="text.secondary">
-                Top City #{index + 1}
-              </Typography>
-              <Typography>
-                {job.job_city}: $
-                {String(job.job_max_salary?.toLocaleString() ?? 'null')}
-              </Typography>
-            </Grid>
-          ))}
-      </Grid>
+      {/* Selected City Jobs List */}
+      {selectedCity && (
+        <>
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            Jobs in {selectedCity}
+          </Typography>
+          <Grid container spacing={2} sx={{ mb: 4 }}>
+            {marketData?.newest
+              .filter((job) => job.job_city === selectedCity)
+              .sort((a, b) => (b.job_max_salary ?? 0) - (a.job_max_salary ?? 0))
+              .slice(0, 3)
+              .map((job) => (
+                <Grid item xs={12} key={job.job_id}>
+                  <Box
+                    sx={{
+                      p: 3,
+                      bgcolor: 'background.paper',
+                      borderRadius: 1,
+                      boxShadow: 1,
+                    }}
+                  >
+                    <Typography variant="h6" gutterBottom>
+                      {job.job_title}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      {job.employer_name}
+                    </Typography>
+                    <Typography>
+                      Salary: ${job.job_max_salary?.toLocaleString() ?? 'null'}
+                    </Typography>
+                  </Box>
+                </Grid>
+              ))}
+          </Grid>
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <Button
+              variant="outlined"
+              onClick={() => onViewSalary(selectedCountry, selectedCity)}
+            >
+              View More Jobs
+            </Button>
+          </Box>
+        </>
+      )}
 
-      {/* Circular Buttons */}
-      <Grid container spacing={4} justifyContent="center">
-        <Grid item>
-          <Box
-            sx={{
-              width: 200,
-              height: 200,
-              borderRadius: '50%',
-              bgcolor: bgcolor,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: selectedCity ? 'pointer' : 'default',
-              opacity: selectedCity ? 1 : 0.5,
-              transition: 'all 0.3s',
-              '&:hover': {
-                transform: selectedCity ? 'scale(1.05)' : 'none',
-              },
-            }}
-            onClick={() => {
-              if (selectedCity) {
-                onViewSalary(selectedCountry, selectedCity);
-              }
-            }}
-          >
-            <Typography variant="h5" align="center">
-              SALARY
-            </Typography>
-          </Box>
+      {!selectedCity && (
+        <Grid container spacing={2} sx={{ mb: 4 }}>
+          {marketData?.newest
+            .sort((a, b) => (b.job_max_salary ?? 0) - (a.job_max_salary ?? 0))
+            .slice(0, 3)
+            .map((job, index) => (
+              <Grid item xs={12} sm={4} key={job.job_city}>
+                <Typography variant="subtitle2" color="text.secondary">
+                  Top City #{index + 1}
+                </Typography>
+                <Typography>
+                  {job.job_city}: $
+                  {String(job.job_max_salary?.toLocaleString() ?? 'null')}
+                </Typography>
+              </Grid>
+            ))}
         </Grid>
-        <Grid item>
-          <Box
-            sx={{
-              width: 200,
-              height: 200,
-              borderRadius: '50%',
-              bgcolor: bgcolor,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: selectedCity ? 'pointer' : 'default',
-              opacity: selectedCity ? 1 : 0.5,
-              transition: 'all 0.3s',
-              '&:hover': {
-                transform: selectedCity ? 'scale(1.05)' : 'none',
-              },
-            }}
-            onClick={() => {
-              if (selectedCity) {
-                onViewMarket(selectedCountry, selectedCity);
-              }
-            }}
-          >
-            <Typography variant="h5" align="center">
-              JOB MARKET
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
+      )}
     </Box>
   );
 };
