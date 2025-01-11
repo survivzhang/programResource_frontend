@@ -9,9 +9,9 @@ import {
 export const careerPaths: CareerPath[] = [
   {
     id: 1,
-    title: 'FRONTEND ENGINEER',
+    title: 'FRONTEND DEVELOPER',
     bgcolor: '#f8bbd0',
-    slug: 'frontend-engineer',
+    slug: 'frontend_developer',
     description:
       '前端工程师负责开发用户界面和交互体验，是连接用户与应用程序的桥梁...',
     skills: [
@@ -42,7 +42,7 @@ export const careerPaths: CareerPath[] = [
     id: 2,
     title: 'DATA ENGINEER',
     bgcolor: '#c8e6c9',
-    slug: 'data-engineer',
+    slug: 'data_analyst',
     description:
       '数据工程师专注于构建和维护数据基础设施，确保数据的高效处理和存储。',
     skills: ['SQL', 'Python', 'ETL', 'Big Data Tools', 'Data Warehousing'],
@@ -58,9 +58,9 @@ export const careerPaths: CareerPath[] = [
   },
   {
     id: 3,
-    title: 'BACKEND ENGINEER',
+    title: 'BACKEND DEVELOPER',
     bgcolor: '#c8e6c9',
-    slug: 'backend-engineer',
+    slug: 'backend_developer',
     description:
       '后端工程师负责服务器端的逻辑实现和数据处理。开发和维护服务器端应用程序，确保系统的可扩展性、性能和安全性。',
     skills: [
@@ -93,7 +93,7 @@ export const careerPaths: CareerPath[] = [
     id: 4,
     title: 'DATA ANALYST',
     bgcolor: '#b2ebf2',
-    slug: 'data-analyst',
+    slug: 'data_analyst',
     description:
       '数据分析师通过分析数据提供业务洞察，帮助企业做出数据驱动的决策。需要处理和分析复杂的数据集，创建可视化报表，并提供建议。',
     skills: [
@@ -127,7 +127,7 @@ export const careerPaths: CareerPath[] = [
     id: 5,
     title: 'DevOps',
     bgcolor: '#b2ebf2',
-    slug: 'devops',
+    slug: 'devops_engineer',
     description:
       'DevOps工程师负责构建和维护CI/CD流程，确保软件的快速、可靠部署。需要协调开发和运维工作，自动化部署流程，监控系统性能。',
     skills: [
@@ -160,7 +160,7 @@ export const careerPaths: CareerPath[] = [
     id: 6,
     title: 'DATA SCIENTIST',
     bgcolor: '#f8bbd0',
-    slug: 'data-scientist',
+    slug: 'data_scientist',
     description:
       '数据科学家运用机器学习和统计方法解决复杂问题。需要设计和实施预测模型，挖掘数据价值，推动数据驱动的决策。',
     skills: [

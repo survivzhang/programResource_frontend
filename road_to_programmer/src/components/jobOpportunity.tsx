@@ -1,4 +1,3 @@
-// src/components/JobOpportunityContent.tsx
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -42,6 +41,7 @@ interface JobOpportunityContentProps {
     slug: string;
   };
 }
+
 const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
   onViewSalary,
   onViewMarket,
@@ -59,20 +59,26 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
     setError(null);
     try {
       const [newestRes, titleRes, cityRes, companyRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/newest${career.slug ? `?title=${career.slug}` : ''}`),
+        fetch(
+          `${API_BASE_URL}/newest${career.slug ? `?title=${career.slug}` : ''}`
+        ),
+        //${career.slug ? `?title=${career.slug}` : ''}
         fetch(`${API_BASE_URL}/top_titles`),
         fetch(`${API_BASE_URL}/top_cities`),
         fetch(`${API_BASE_URL}/top_companies`),
       ]);
+
       if (!newestRes.ok || !titleRes.ok || !cityRes.ok || !companyRes.ok) {
         throw new Error('Failed to fetch data');
       }
+
       const [newest, topTitles, topCities, topCompanies] = await Promise.all([
         newestRes.json(),
         titleRes.json(),
         cityRes.json(),
         companyRes.json(),
       ]);
+
       setMarketData({
         newest,
         topTitles,
@@ -82,9 +88,71 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
       console.error('Error fetching market data:', err);
-    }finally {
+    } finally {
       setIsLoading(false);
     }
+  };
+
+  useEffect(() => {
+    fetchMarketData();
+  }, [career.slug]);
+
+  useEffect(() => {
+    console.log('Market Data:', marketData);
+    console.log('Locations:', getLocations());
+  }, [marketData]);
+  const getLocations = () => {
+    if (!marketData?.newest) return [];
+
+    const locations = marketData.newest.reduce(
+      (acc: { country: string; cities: string[] }[], job) => {
+        if (!job.job_country || !job.job_city) return acc;
+
+        const countryIndex = acc.findIndex(
+          (loc) => loc.country === job.job_country
+        );
+
+        if (countryIndex === -1) {
+          acc.push({
+            country: job.job_country,
+            cities: [job.job_city],
+          });
+        } else if (!acc[countryIndex].cities.includes(job.job_city)) {
+          acc[countryIndex].cities.push(job.job_city);
+        }
+
+        return acc;
+      },
+      []
+    );
+
+    return locations
+      .map((loc) => ({
+        country: loc.country,
+        cities: loc.cities.sort(),
+      }))
+      .sort((a, b) => a.country.localeCompare(b.country));
+  };
+
+  const locations = getLocations();
+  const cities =
+    locations.find((loc) => loc.country === selectedCountry)?.cities || [];
+
+  if (isLoading) {
+    return (
+      <Box sx={{ p: 3 }}>
+        <Typography>Loading market data...</Typography>
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ p: 3 }}>
+        <Typography color="error">Error: {error}</Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ p: 3 }}>
@@ -125,6 +193,20 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
             </Select>
           </FormControl>
         </Grid>
+      </Grid>
+
+      {/* Market Stats */}
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {marketData?.topCities.slice(0, 3).map((cityData, index) => (
+          <Grid item xs={12} sm={4} key={cityData.city_name}>
+            <Typography variant="subtitle2" color="text.secondary">
+              Top City #{index + 1}
+            </Typography>
+            <Typography>
+              {cityData.city_name}: ${cityData.average_salary.toLocaleString()}
+            </Typography>
+          </Grid>
+        ))}
       </Grid>
 
       {/* Circular Buttons */}
