@@ -7,6 +7,7 @@ import {
   MenuItem,
   Grid,
   Typography,
+  Button,
 } from '@mui/material';
 
 interface JobData {
@@ -22,6 +23,16 @@ interface JobData {
   job_description: string;
   qualifications: string[];
   responsibilities: string[];
+}
+interface LocationInfo {
+  country: string;
+  cities: {
+    name: string;
+    jobCount: number;
+    averageSalary: number;
+    maxSalary: number;
+    employerCount: number;
+  }[];
 }
 
 interface JobMarketData {
@@ -62,7 +73,6 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
         fetch(
           `${API_BASE_URL}/newest${career.slug ? `?title=${career.slug}` : ''}`
         ),
-        //${career.slug ? `?title=${career.slug}` : ''}
         fetch(`${API_BASE_URL}/top_titles`),
         fetch(`${API_BASE_URL}/top_cities`),
         fetch(`${API_BASE_URL}/top_companies`),
@@ -97,39 +107,60 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
     fetchMarketData();
   }, [career.slug]);
 
-  useEffect(() => {
-    console.log('Market Data:', marketData);
-    console.log('Locations:', getLocations());
-  }, [marketData]);
   const getLocations = () => {
     if (!marketData?.newest) return [];
 
-    const locations = marketData.newest.reduce(
-      (acc: { country: string; cities: string[] }[], job) => {
-        if (!job.job_country || !job.job_city) return acc;
+    const locations = marketData.newest.reduce((acc: LocationInfo[], job) => {
+      if (!job.job_country || !job.job_city) return acc;
 
-        const countryIndex = acc.findIndex(
-          (loc) => loc.country === job.job_country
+      const countryIndex = acc.findIndex(
+        (loc) => loc.country === job.job_country
+      );
+
+      const salary = job.job_max_salary ?? 0;
+
+      if (countryIndex === -1) {
+        acc.push({
+          country: job.job_country,
+          cities: [
+            {
+              name: job.job_city,
+              jobCount: 1,
+              averageSalary: salary,
+              maxSalary: salary,
+              employerCount: 1,
+            },
+          ],
+        });
+      } else {
+        const cityIndex = acc[countryIndex].cities.findIndex(
+          (city) => city.name === job.job_city
         );
 
-        if (countryIndex === -1) {
-          acc.push({
-            country: job.job_country,
-            cities: [job.job_city],
+        if (cityIndex === -1) {
+          acc[countryIndex].cities.push({
+            name: job.job_city,
+            jobCount: 1,
+            averageSalary: salary,
+            maxSalary: salary,
+            employerCount: 1,
           });
-        } else if (!acc[countryIndex].cities.includes(job.job_city)) {
-          acc[countryIndex].cities.push(job.job_city);
+        } else {
+          const city = acc[countryIndex].cities[cityIndex];
+          city.jobCount += 1;
+          city.averageSalary =
+            (city.averageSalary * (city.jobCount - 1) + salary) / city.jobCount;
+          city.maxSalary = Math.max(city.maxSalary, salary);
         }
+      }
 
-        return acc;
-      },
-      []
-    );
+      return acc;
+    }, []);
 
     return locations
       .map((loc) => ({
-        country: loc.country,
-        cities: loc.cities.sort(),
+        ...loc,
+        cities: loc.cities.sort((a, b) => b.maxSalary - a.maxSalary),
       }))
       .sort((a, b) => a.country.localeCompare(b.country));
   };
@@ -171,7 +202,7 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
             >
               {locations.map((location) => (
                 <MenuItem key={location.country} value={location.country}>
-                  {location.country}
+                  {location.country} ({location.cities.length} cities)
                 </MenuItem>
               ))}
             </Select>
@@ -186,8 +217,9 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
               onChange={(e) => setSelectedCity(e.target.value)}
             >
               {cities.map((city) => (
-                <MenuItem key={city} value={city}>
-                  {city}
+                <MenuItem key={city.name} value={city.name}>
+                  {city.name} ({city.jobCount} jobs, Max: $
+                  {city.maxSalary.toLocaleString()})
                 </MenuItem>
               ))}
             </Select>
@@ -195,18 +227,22 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
         </Grid>
       </Grid>
 
-      {/* Market Stats */}
+      {/* Market Stats - Top 3 High Salary Cities from Newest Jobs */}
       <Grid container spacing={2} sx={{ mb: 4 }}>
-        {marketData?.topCities.slice(0, 3).map((cityData, index) => (
-          <Grid item xs={12} sm={4} key={cityData.city_name}>
-            <Typography variant="subtitle2" color="text.secondary">
-              Top City #{index + 1}
-            </Typography>
-            <Typography>
-              {cityData.city_name}: ${cityData.average_salary.toLocaleString()}
-            </Typography>
-          </Grid>
-        ))}
+        {marketData?.newest
+          .sort((a, b) => (b.job_max_salary ?? 0) - (a.job_max_salary ?? 0))
+          .slice(0, 3)
+          .map((job, index) => (
+            <Grid item xs={12} sm={4} key={job.job_city}>
+              <Typography variant="subtitle2" color="text.secondary">
+                Top City #{index + 1}
+              </Typography>
+              <Typography>
+                {job.job_city}: $
+                {String(job.job_max_salary?.toLocaleString() ?? 'null')}
+              </Typography>
+            </Grid>
+          ))}
       </Grid>
 
       {/* Circular Buttons */}
