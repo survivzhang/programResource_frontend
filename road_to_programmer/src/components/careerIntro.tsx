@@ -25,7 +25,7 @@ const CareerIntroPage: React.FC = () => {
     return (
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Typography variant="h5" align="center">
-          未找到该职业路径
+          Career Path Not Found
         </Typography>
         <Box sx={{ textAlign: 'center', mt: 2 }}>
           <Button
@@ -33,7 +33,7 @@ const CareerIntroPage: React.FC = () => {
             onClick={() => navigate('/')}
             variant="contained"
           >
-            返回首页
+            Back to Home
           </Button>
         </Box>
       </Container>
@@ -47,7 +47,7 @@ const CareerIntroPage: React.FC = () => {
           <>
             <Typography variant="body1">{career.description}</Typography>
             <Typography variant="h5" sx={{ mt: 4 }}>
-              核心技能
+              Core Skills
             </Typography>
             <List>
               {career.skills.map((skill, index) => (
@@ -62,7 +62,7 @@ const CareerIntroPage: React.FC = () => {
         return (
           <>
             <Typography variant="h5" sx={{ mb: 3 }}>
-              学习路线
+              Learning Path
             </Typography>
             <List>
               {career.roadmap.map((step, index) => (
@@ -74,9 +74,17 @@ const CareerIntroPage: React.FC = () => {
           </>
         );
       case 'reference':
-        return <Typography variant="body1">参考资料区域（待完善）</Typography>;
+        return (
+          <Typography variant="body1">
+            Reference Materials (Coming Soon)
+          </Typography>
+        );
       case 'job':
-        return <Typography variant="body1">工作机会区域（待完善）</Typography>;
+        return (
+          <Typography variant="body1">
+            Job Opportunities (Coming Soon)
+          </Typography>
+        );
       default:
         return null;
     }
@@ -91,7 +99,7 @@ const CareerIntroPage: React.FC = () => {
             onClick={() => navigate('/')}
             sx={{ mb: 3, color: 'white' }}
           >
-            返回
+            Back
           </Button>
           <Typography
             variant="h3"

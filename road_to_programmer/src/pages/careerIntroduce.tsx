@@ -32,7 +32,7 @@ const CareerIntroPage: React.FC = () => {
 
   return (
     <>
-      {/* 标题区域 */}
+      {/* Title Section */}
       <Box sx={{ bgcolor: career.bgcolor, minHeight: '200px' }}>
         <Container maxWidth="lg" sx={{ py: 3 }}>
           <Button
@@ -40,7 +40,7 @@ const CareerIntroPage: React.FC = () => {
             onClick={() => navigate('/')}
             sx={{ color: 'black', mb: 2 }}
           >
-            返回
+            Back
           </Button>
           <Typography variant="h3" component="h1">
             {career.title}
@@ -48,7 +48,7 @@ const CareerIntroPage: React.FC = () => {
         </Container>
       </Box>
 
-      {/* 导航栏和内容区域 */}
+      {/* Navigation and Content Area */}
       <Container maxWidth="lg" sx={{ mt: -5 }}>
         <Box
           sx={{
@@ -58,7 +58,7 @@ const CareerIntroPage: React.FC = () => {
             overflow: 'hidden',
           }}
         >
-          {/* 添加导航栏 */}
+          {/* Navigation Tabs */}
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
               value={currentTab}
@@ -73,17 +73,17 @@ const CareerIntroPage: React.FC = () => {
               <Tab label="INTRODUCE" value="introduce" />
               <Tab label="PATH" value="path" />
               <Tab label="REFERENCE" value="reference" />
-              <Tab label="JOB opportunity" value="job" />
+              <Tab label="JOB OPPORTUNITY" value="job" />
             </Tabs>
           </Box>
 
-          {/* 内容区域 */}
+          {/* Content Area */}
           <Box
             sx={{
               p: 3,
-              height: '600px', // 固定高度
-              width: '100%', // 占满容器宽度
-              minWidth: '1200px', // 最小宽度
+              height: '600px', // Fixed height
+              width: '100%', // Full container width
+              minWidth: '1200px', // Minimum width
               overflow: 'auto',
             }}
           >
@@ -93,7 +93,7 @@ const CareerIntroPage: React.FC = () => {
                   {career.description}
                 </Typography>
                 <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
-                  核心技能
+                  Core Skills
                 </Typography>
                 <List>
                   {career.skills.map((skill, index) => (
@@ -107,7 +107,7 @@ const CareerIntroPage: React.FC = () => {
             {currentTab === 'path' && (
               <>
                 <Typography variant="h5" sx={{ mb: 2 }}>
-                  学习路线
+                  Learning Path
                 </Typography>
                 <List>
                   {career.roadmap.map((step, index) => (
