@@ -41,7 +41,8 @@ const Rating = ({
     </div>
   );
 };
-// 创建展开按钮的样式组件
+
+// Create styled component for expand button
 const ExpandMore = styled((props: any) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -79,11 +80,19 @@ const CareerCard: React.FC<ExtendedCareerCardProps> = ({
   };
 
   const ratingConfigs = [
-    { label: '学习难度', value: ratings.difficulty, color: '#FF5722' },
-    { label: '薪资水平', value: ratings.salary, color: '#4CAF50' },
-    { label: '市场需求', value: ratings.demand, color: '#2196F3' },
-    { label: '职业稳定性', value: ratings.stability, color: '#FF9800' },
-    { label: '发展前景', value: ratings.futureProspect, color: '#9C27B0' },
+    {
+      label: 'Learning Difficulty',
+      value: ratings.difficulty,
+      color: '#FF5722',
+    },
+    { label: 'Salary Level', value: ratings.salary, color: '#4CAF50' },
+    { label: 'Market Demand', value: ratings.demand, color: '#2196F3' },
+    { label: 'Job Stability', value: ratings.stability, color: '#FF9800' },
+    {
+      label: 'Career Prospects',
+      value: ratings.futureProspect,
+      color: '#9C27B0',
+    },
   ];
 
   return (
@@ -152,7 +161,7 @@ const CareerCard: React.FC<ExtendedCareerCardProps> = ({
               },
             }}
           >
-            了解更多
+            Learn More
           </Button>
         </CardContent>
       </Collapse>

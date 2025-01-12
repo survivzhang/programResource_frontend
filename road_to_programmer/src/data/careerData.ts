@@ -6,6 +6,7 @@ import {
   backendReferences,
   devopsReferences,
 } from './referenceData';
+
 export const careerPaths: CareerPath[] = [
   {
     id: 1,
@@ -13,28 +14,28 @@ export const careerPaths: CareerPath[] = [
     bgcolor: '#f8bbd0',
     slug: 'frontend_developer',
     description:
-      '前端工程师负责开发用户界面和交互体验，是连接用户与应用程序的桥梁...',
+      'Frontend developers are responsible for developing user interfaces and interaction experiences, serving as a bridge between users and applications...',
     skills: [
       'HTML5/CSS3',
       'JavaScript/TypeScript',
       'React/Vue/Angular',
       'Webpack/Vite',
-      '响应式设计',
-      '浏览器开发工具',
+      'Responsive Design',
+      'Browser DevTools',
     ],
     roadmap: [
-      '掌握 HTML/CSS 基础',
-      '学习 JavaScript 核心概念',
-      '深入了解现代框架（React/Vue）',
-      '学习构建工具和工程化',
-      '掌握性能优化技巧',
+      'Master HTML/CSS Basics',
+      'Learn JavaScript Core Concepts',
+      'Deep Dive into Modern Frameworks (React/Vue)',
+      'Learn Build Tools and Engineering',
+      'Master Performance Optimization',
     ],
     ratings: {
-      difficulty: 4, // 需要较强的技术背景
-      salary: 4, // 薪资较高
-      demand: 4, // 需求稳定
-      stability: 4, // 就业稳定
-      futureProspect: 5, // 发展前景很好
+      difficulty: 4, // Requires strong technical background
+      salary: 4, // High salary
+      demand: 4, // Stable demand
+      stability: 4, // Stable employment
+      futureProspect: 5, // Excellent future prospects
     },
     references: frontendReferences,
   },
@@ -44,16 +45,21 @@ export const careerPaths: CareerPath[] = [
     bgcolor: '#c8e6c9',
     slug: 'data_analyst',
     description:
-      '数据工程师专注于构建和维护数据基础设施，确保数据的高效处理和存储。',
+      'Data engineers focus on building and maintaining data infrastructure, ensuring efficient data processing and storage.',
     skills: ['SQL', 'Python', 'ETL', 'Big Data Tools', 'Data Warehousing'],
-    roadmap: ['掌握 SQL', '学习 Python', '了解数据仓库', '掌握 ETL 流程'],
+    roadmap: [
+      'Master SQL',
+      'Learn Python',
+      'Understand Data Warehousing',
+      'Master ETL Processes',
+    ],
     references: devopsReferences,
     ratings: {
-      difficulty: 3, // 入门相对容易
-      salary: 4, // 薪资较高
-      demand: 5, // 市场需求很大
-      stability: 4, // 就业相对稳定
-      futureProspect: 4, // 发展前景好
+      difficulty: 3, // Relatively easy to enter
+      salary: 4, // High salary
+      demand: 5, // High market demand
+      stability: 4, // Relatively stable
+      futureProspect: 4, // Good future prospects
     },
   },
   {
@@ -62,30 +68,30 @@ export const careerPaths: CareerPath[] = [
     bgcolor: '#c8e6c9',
     slug: 'backend_developer',
     description:
-      '后端工程师负责服务器端的逻辑实现和数据处理。开发和维护服务器端应用程序，确保系统的可扩展性、性能和安全性。',
+      'Backend developers are responsible for server-side logic implementation and data processing. They develop and maintain server-side applications, ensuring system scalability, performance, and security.',
     skills: [
       'Java/Python/Node.js',
       'Spring/Django/Express',
       'MySQL/PostgreSQL',
       'Redis/MongoDB',
-      'RESTful API设计',
-      '系统架构设计',
-      '微服务架构',
+      'RESTful API Design',
+      'System Architecture Design',
+      'Microservice Architecture',
     ],
     roadmap: [
-      '选择并掌握后端语言',
-      '学习数据库技术',
-      '掌握框架开发',
-      '了解网络协议',
-      '学习系统设计',
-      '实践微服务架构',
+      'Choose and Master Backend Language',
+      'Learn Database Technologies',
+      'Master Framework Development',
+      'Understand Network Protocols',
+      'Learn System Design',
+      'Practice Microservice Architecture',
     ],
     ratings: {
-      difficulty: 4, // 技术要求较高
-      salary: 4, // 薪资较高
-      demand: 5, // 市场需求大
-      stability: 5, // 就业非常稳定
-      futureProspect: 5, // 发展前景很好
+      difficulty: 4, // High technical requirements
+      salary: 4, // High salary
+      demand: 5, // High market demand
+      stability: 5, // Very stable employment
+      futureProspect: 5, // Excellent future prospects
     },
     references: backendReferences,
   },
@@ -95,32 +101,31 @@ export const careerPaths: CareerPath[] = [
     bgcolor: '#b2ebf2',
     slug: 'data_analyst',
     description:
-      '数据分析师通过分析数据提供业务洞察，帮助企业做出数据驱动的决策。需要处理和分析复杂的数据集，创建可视化报表，并提供建议。',
+      'Data analysts provide business insights through data analysis, helping companies make data-driven decisions. They process and analyze complex datasets, create visualization reports, and provide recommendations.',
     skills: [
       'SQL',
-      'Excel高级功能',
+      'Advanced Excel',
       'Python/R',
       'Power BI/Tableau',
-      '统计分析',
-      '数据可视化',
-      '商业分析',
+      'Statistical Analysis',
+      'Data Visualization',
+      'Business Analysis',
     ],
     roadmap: [
-      '掌握数据分析工具',
-      '学习统计学基础',
-      '掌握数据可视化',
-      '学习商业分析方法',
-      '提升数据讲述能力',
-      '了解机器学习基础',
+      'Master Data Analysis Tools',
+      'Learn Statistics Fundamentals',
+      'Master Data Visualization',
+      'Learn Business Analysis Methods',
+      'Enhance Data Storytelling',
+      'Understand Machine Learning Basics',
     ],
     ratings: {
-      difficulty: 3, // 入门难度适中
-      salary: 3, // 薪资中等
-      demand: 4, // 需求较大
-      stability: 4, // 较为稳定
-      futureProspect: 4, // 发展前景好
+      difficulty: 3, // Moderate entry difficulty
+      salary: 3, // Medium salary
+      demand: 4, // High demand
+      stability: 4, // Relatively stable
+      futureProspect: 4, // Good future prospects
     },
-
     references: devopsReferences,
   },
   {
@@ -129,31 +134,31 @@ export const careerPaths: CareerPath[] = [
     bgcolor: '#b2ebf2',
     slug: 'devops_engineer',
     description:
-      'DevOps工程师负责构建和维护CI/CD流程，确保软件的快速、可靠部署。需要协调开发和运维工作，自动化部署流程，监控系统性能。',
+      'DevOps engineers are responsible for building and maintaining CI/CD pipelines, ensuring fast and reliable software deployment. They coordinate development and operations work, automate deployment processes, and monitor system performance.',
     skills: [
-      'Linux系统管理',
+      'Linux System Administration',
       'Docker/Kubernetes',
-      'CI/CD工具',
+      'CI/CD Tools',
       'AWS/Azure/GCP',
-      'Shell脚本',
-      '监控工具',
-      '安全实践',
+      'Shell Scripting',
+      'Monitoring Tools',
+      'Security Practices',
     ],
     roadmap: [
-      '学习Linux基础',
-      '掌握容器技术',
-      '学习CI/CD流程',
-      '了解云平台服务',
-      '掌握自动化工具',
-      '学习系统监控',
+      'Learn Linux Fundamentals',
+      'Master Container Technologies',
+      'Learn CI/CD Processes',
+      'Understand Cloud Platforms',
+      'Master Automation Tools',
+      'Learn System Monitoring',
     ],
     references: devopsReferences,
     ratings: {
-      difficulty: 5, // 技术难度大
-      salary: 5, // 薪资很高
-      demand: 4, // 需求较大
-      stability: 4, // 较为稳定
-      futureProspect: 5, // 发展前景很好
+      difficulty: 5, // High technical difficulty
+      salary: 5, // Very high salary
+      demand: 4, // High demand
+      stability: 4, // Relatively stable
+      futureProspect: 5, // Excellent future prospects
     },
   },
   {
@@ -162,32 +167,31 @@ export const careerPaths: CareerPath[] = [
     bgcolor: '#f8bbd0',
     slug: 'data_scientist',
     description:
-      '数据科学家运用机器学习和统计方法解决复杂问题。需要设计和实施预测模型，挖掘数据价值，推动数据驱动的决策。',
+      'Data scientists use machine learning and statistical methods to solve complex problems. They design and implement predictive models, extract data value, and drive data-driven decision-making.',
     skills: [
       'Python/R',
-      '机器学习算法',
-      '深度学习框架',
-      '统计学',
+      'Machine Learning Algorithms',
+      'Deep Learning Frameworks',
+      'Statistics',
       'SQL',
-      '数据可视化',
-      '特征工程',
+      'Data Visualization',
+      'Feature Engineering',
     ],
     roadmap: [
-      '掌握编程语言',
-      '学习统计学基础',
-      '理解机器学习算法',
-      '学习深度学习',
-      '实践数据建模',
-      '培养业务理解力',
+      'Master Programming Languages',
+      'Learn Statistics Fundamentals',
+      'Understand ML Algorithms',
+      'Learn Deep Learning',
+      'Practice Data Modeling',
+      'Develop Business Understanding',
     ],
     references: devopsReferences,
     ratings: {
-      difficulty: 5, // 技术要求高
-      salary: 5, // 薪资很高
-      demand: 4, // 需求较大
-      stability: 4, // 较为稳定
-      futureProspect: 5, // 发展前景很好
+      difficulty: 5, // High technical requirements
+      salary: 5, // Very high salary
+      demand: 4, // High demand
+      stability: 4, // Relatively stable
+      futureProspect: 5, // Excellent future prospects
     },
   },
-  // ... 其他职业路径数据
 ];
