@@ -129,10 +129,10 @@ const CareerIntroPage: React.FC = () => {
                 career={career}
                 bgcolor={career.bgcolor}
                 onViewSalary={(country, city) => {
-                  navigate(`/career/${career.slug}/salary/${country}/${city}`);
+                  navigate(`/career/${career.slug}/jobs/${country}/${city}`);
                 }}
                 onViewMarket={(country, city) => {
-                  navigate(`/career/${career.slug}/market/${country}/${city}`);
+                  navigate(`/career/${career.slug}/jobs/${country}/${city}`);
                 }}
               />
             )}

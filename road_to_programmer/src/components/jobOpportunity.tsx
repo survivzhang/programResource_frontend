@@ -270,7 +270,7 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
               variant="outlined"
               onClick={() => onViewSalary(selectedCountry, selectedCity)}
             >
-              View More Jobs
+              View All Jobs in {selectedCity}
             </Button>
           </Box>
         </>
