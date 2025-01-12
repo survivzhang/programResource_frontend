@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # 从构建阶段复制构建结果到 nginx 目录
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 # nginx 端口
 EXPOSE 80
