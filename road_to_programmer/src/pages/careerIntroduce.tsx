@@ -16,6 +16,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { careerPaths } from '../data/careerData';
 import ReferenceContent from '../components/referenceContent';
 import JobOpportunityContent from '../components/jobOpportunity';
+import Tools from '../components/Tools';
 
 const CareerIntroPage: React.FC = () => {
   const { slug } = useParams();
@@ -73,6 +74,7 @@ const CareerIntroPage: React.FC = () => {
               <Tab label="INTRODUCE" value="introduce" />
               <Tab label="PATH" value="path" />
               <Tab label="REFERENCE" value="reference" />
+              <Tab label="TOOLS" value="tools" />
               <Tab label="JOB OPPORTUNITY" value="job" />
             </Tabs>
           </Box>
@@ -118,6 +120,7 @@ const CareerIntroPage: React.FC = () => {
                 </List>
               </>
             )}
+            {currentTab === 'tools' && <Tools />}
             {currentTab === 'reference' && career.references && (
               <ReferenceContent
                 references={career.references}
