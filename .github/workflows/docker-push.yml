@@ -1,6 +1,15 @@
 name: ecr push image
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+      workspace:
+        description: 'ECR push'
+        required: false
+        default: 'default'
+       
+# on:
+#   push:
+    
 jobs:
   push:
     runs-on: ubuntu-latest
