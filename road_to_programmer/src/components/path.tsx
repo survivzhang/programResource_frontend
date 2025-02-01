@@ -17,7 +17,11 @@ interface PathData {
   };
 }
 
-const LearningPath = () => {
+interface LearningPathProps {
+  bgcolor?: string;
+}
+
+const LearningPath: React.FC<LearningPathProps> = ({ bgcolor = '#4CAF50' }) => {
   const [pathData, setPathData] = useState<PathData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -76,8 +80,8 @@ const LearningPath = () => {
           <Paper
             elevation={3}
             sx={{
-              bgcolor: 'primary.main',
-              color: 'primary.contrastText',
+              bgcolor: bgcolor,
+              color: '#ffffff',
               p: 2,
               mb: 2,
               textAlign: 'center',
@@ -106,8 +110,7 @@ const LearningPath = () => {
                   <Paper key={subCat} sx={{ mb: 2, p: 2 }}>
                     <Typography
                       variant="subtitle1"
-                      color="primary"
-                      sx={{ mb: 1 }}
+                      sx={{ mb: 1, color: bgcolor }}
                     >
                       {subCat.replace(/([A-Z])/g, ' $1').trim()}
                     </Typography>
@@ -130,7 +133,7 @@ const LearningPath = () => {
 
             {/* Arrow */}
             <Box sx={{ display: 'flex', alignItems: 'center', px: 2 }}>
-              <ArrowForwardIcon color="action" />
+              <ArrowForwardIcon sx={{ color: bgcolor }} />
             </Box>
 
             {/* Right column */}
@@ -141,8 +144,7 @@ const LearningPath = () => {
                   <Paper key={subCat} sx={{ mb: 2, p: 2 }}>
                     <Typography
                       variant="subtitle1"
-                      color="primary"
-                      sx={{ mb: 1 }}
+                      sx={{ mb: 1, color: bgcolor }}
                     >
                       {subCat.replace(/([A-Z])/g, ' $1').trim()}
                     </Typography>
@@ -170,7 +172,7 @@ const LearningPath = () => {
               sx={{
                 height: 32,
                 width: 2,
-                bgcolor: 'divider',
+                bgcolor: bgcolor,
                 mx: 'auto',
                 my: 2,
               }}

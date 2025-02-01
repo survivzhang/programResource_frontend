@@ -112,9 +112,10 @@ const CareerIntroPage: React.FC = () => {
                 <Typography variant="h5" sx={{ mb: 2 }}>
                   Learning Path
                 </Typography>
-                <LearningPath />
+                <LearningPath bgcolor={career.bgcolor} />
               </Box>
             )}
+
             {currentTab === 'tools' && <Tools />}
             {currentTab === 'reference' && career.references && (
               <ReferenceContent
