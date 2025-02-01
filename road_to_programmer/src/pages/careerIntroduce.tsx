@@ -17,6 +17,7 @@ import { careerPaths } from '../data/careerData';
 import ReferenceContent from '../components/referenceContent';
 import JobOpportunityContent from '../components/jobOpportunity';
 import Tools from '../components/Tools';
+import LearningPath from '../components/path';
 
 const CareerIntroPage: React.FC = () => {
   const { slug } = useParams();
@@ -107,18 +108,12 @@ const CareerIntroPage: React.FC = () => {
               </>
             )}
             {currentTab === 'path' && (
-              <>
+              <Box sx={{ overflow: 'auto' }}>
                 <Typography variant="h5" sx={{ mb: 2 }}>
                   Learning Path
                 </Typography>
-                <List>
-                  {career.roadmap.map((step, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={`${index + 1}. ${step}`} />
-                    </ListItem>
-                  ))}
-                </List>
-              </>
+                <LearningPath />
+              </Box>
             )}
             {currentTab === 'tools' && <Tools />}
             {currentTab === 'reference' && career.references && (
