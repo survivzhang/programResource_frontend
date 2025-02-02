@@ -5,44 +5,69 @@ import CareerCard from '../components/careerCard';
 import { careerPaths } from '../data/careerData';
 
 const ProgrammerRoadmap: React.FC = () => {
-  const navigate = useNavigate(); // 使用 useNavigate 替代 useRouter
+  const navigate = useNavigate();
 
   const handleCardClick = (slug: string): void => {
     navigate(`/career/${slug}`);
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      {/* 标题区域 */}
+    <Box
+      sx={{
+        width: '100%',
+        minHeight: '100vh',
+        margin: 0,
+        padding: 0,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+      }}
+    >
       <Box
         sx={{
-          bgcolor: '#7b1fa2',
-          color: 'white',
-          p: 2,
-          mb: 4,
-          borderRadius: 1,
-          boxShadow: 2,
+          bgcolor: '#483A62',
+          opacity: 0.7,
+          py: 1,
+          px: 3,
+          width: '100%',
+          margin: 0,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
         }}
       >
-        <Typography variant="h4" component="h1" fontWeight="bold">
+        <Typography
+          variant="h6"
+          component="h3"
+          sx={{ color: 'white', fontWeight: 'bold' }}
+        >
           ROAD TO PROGRAMMER
         </Typography>
       </Box>
 
-      {/* 卡片网格 */}
-      <Grid container spacing={4}>
-        {careerPaths.map((path) => (
-          <Grid item xs={12} md={6} key={path.id}>
-            <CareerCard
-              title={path.title}
-              bgcolor={path.bgcolor}
-              onClick={() => handleCardClick(path.slug)}
-              ratings={path.ratings}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+      <Container
+        maxWidth="lg"
+        sx={{
+          pt: { xs: 12, sm: 24 }, // 增加上边距，响应式调整
+          pb: 4,
+          px: { xs: 2, sm: 3 }, // 可选：增加左右边距
+        }}
+      >
+        <Grid container spacing={4}>
+          {careerPaths.map((path) => (
+            <Grid item xs={12} md={6} key={path.id}>
+              <CareerCard
+                title={path.title}
+                bgcolor={path.bgcolor}
+                onClick={() => handleCardClick(path.slug)}
+                ratings={path.ratings}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 
