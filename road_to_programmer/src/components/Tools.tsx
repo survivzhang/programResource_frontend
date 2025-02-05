@@ -21,12 +21,13 @@ const Tools: React.FC = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:5001/roadmap?name=frontend_engineer`
+          `http://localhost:5001/roadmap?name=frontend_engineer` //部署需要一个环境变量
         );
         if (!response.ok) {
           throw new Error('Failed to fetch tools data');
         }
         const data: RoadmapData = await response.json();
+        // 直接使用返回的 tools 数组
         setTools(data.tools || []);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
