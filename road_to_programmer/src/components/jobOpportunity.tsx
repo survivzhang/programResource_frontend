@@ -42,7 +42,7 @@ interface JobMarketData {
   topCompanies: Array<{ company_name: string; average_salary: number }>;
 }
 
-const API_BASE_URL = '${import.meta.env.REACT_APP_BASIC_URL}/api/job_market';
+const API_BASE_URL = `${import.meta.env.VITE_API_SECOND_URL}/api/job_market`;
 
 interface JobOpportunityContentProps {
   onViewSalary: (country: string, city: string) => void;

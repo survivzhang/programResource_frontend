@@ -31,7 +31,7 @@ const LearningPath: React.FC<LearningPathProps> = ({ bgcolor = '#4CAF50' }) => {
       try {
         setLoading(true);
         const response = await fetch(
-          '${import.meta.env.REACT_APP_BASIC_URL}/roadmap?name=frontend_engineer' //部署需要一个环境变量
+          `${import.meta.env.VITE_API_BASE_URL}/roadmap?name=frontend_engineer` //部署需要一个环境变量
         );
         if (!response.ok) {
           throw new Error('Failed to fetch path data');
