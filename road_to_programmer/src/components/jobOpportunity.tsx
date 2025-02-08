@@ -45,7 +45,11 @@ interface JobMarketData {
 const API_BASE_URL = `${import.meta.env.VITE_API_SECOND_URL}/api/job_market`;
 
 interface JobOpportunityContentProps {
-  onViewSalary: (country: string, city: string) => void;
+  onViewSalary: (
+    country: string,
+    city: string,
+    data: { jobCount: number; maxSalary: number; jobs: JobData[] }
+  ) => void;
   onViewMarket: (country: string, city: string) => void;
   bgcolor: string;
   career: {
@@ -266,7 +270,19 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <Button
               variant="outlined"
-              onClick={() => onViewSalary(selectedCountry, selectedCity)}
+              onClick={() => {
+                const cityData = cities.find(
+                  (city) => city.name === selectedCity
+                );
+                onViewSalary(selectedCountry, selectedCity, {
+                  jobCount: cityData?.jobCount || 0,
+                  maxSalary: cityData?.maxSalary || 0,
+                  jobs:
+                    marketData?.newest.filter(
+                      (job) => job.job_city === selectedCity
+                    ) || [],
+                });
+              }}
             >
               View All Jobs in {selectedCity}
             </Button>

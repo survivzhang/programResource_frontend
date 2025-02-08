@@ -19,7 +19,7 @@ interface JobData {
   responsibilities: string[];
 }
 
-const API_BASE_URL = '${import.meta.env.VITE_API_SECOND_URL}/api/job_market';
+const API_BASE_URL = `${import.meta.env.VITE_API_SECOND_URL}/api/job_market`;
 
 const CityJobs: React.FC = () => {
   const { slug, country, city } = useParams();
