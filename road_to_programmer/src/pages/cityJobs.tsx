@@ -1,6 +1,6 @@
 // src/pages/CityJobs.tsx
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Container, Box, Typography, Grid, Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -19,58 +19,37 @@ interface JobData {
   responsibilities: string[];
 }
 
-const API_BASE_URL = `${import.meta.env.VITE_API_SECOND_URL}/api/job_market`;
+interface LocationState {
+  jobs: JobData[];
+  jobCount: number;
+  maxSalary: number;
+}
 
 const CityJobs: React.FC = () => {
   const { slug, country, city } = useParams();
   const navigate = useNavigate();
-  const [jobs, setJobs] = useState<JobData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const location = useLocation();
+  const state = location.state as LocationState;
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await fetch(
-          `${API_BASE_URL}/newest?title=${slug}&city=${city}&country=${country}`
-        );
-        if (!response.ok) {
-          throw new Error('Failed to fetch jobs');
-        }
-        const data = await response.json();
-        setJobs(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load jobs');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchJobs();
-  }, [slug, city, country]);
-
-  const handleBack = () => {
-    // Navigate back to the career page with the job tab selected
-    navigate(`/career/${slug}`, { state: { defaultTab: 'job' } });
-  };
-
-  if (isLoading) {
+  // 如果没有传入数据，显示无数据状态
+  if (!state?.jobs) {
     return (
       <Container maxWidth="lg">
-        <Typography>Loading jobs...</Typography>
+        <Button
+          startIcon={<ArrowBackIcon />}
+          onClick={() =>
+            navigate(`/career/${slug}`, { state: { defaultTab: 'job' } })
+          }
+          sx={{ mb: 2 }}
+        >
+          Back to Career
+        </Button>
+        <Typography>No job data available</Typography>
       </Container>
     );
   }
 
-  if (error) {
-    return (
-      <Container maxWidth="lg">
-        <Typography color="error">{error}</Typography>
-      </Container>
-    );
-  }
-
-  const sortedJobs = [...jobs].sort(
+  const sortedJobs = [...state.jobs].sort(
     (a, b) => (b.job_max_salary ?? 0) - (a.job_max_salary ?? 0)
   );
 
@@ -81,14 +60,21 @@ const CityJobs: React.FC = () => {
         <Container maxWidth="lg">
           <Button
             startIcon={<ArrowBackIcon />}
-            onClick={handleBack}
+            onClick={() =>
+              navigate(`/career/${slug}`, { state: { defaultTab: 'job' } })
+            }
             sx={{ mb: 2 }}
           >
             Back to Career
           </Button>
           <Typography variant="h4" component="h1" gutterBottom>
-            {sortedJobs.length} Jobs in {city}, {country}
+            {state.jobCount} Jobs in {city}, {country}
           </Typography>
+          {state.maxSalary > 0 && (
+            <Typography color="text.secondary" gutterBottom>
+              Maximum salary in this area: ${state.maxSalary.toLocaleString()}
+            </Typography>
+          )}
           <Typography color="text.secondary">
             Showing all available positions sorted by salary
           </Typography>

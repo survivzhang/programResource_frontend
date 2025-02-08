@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   FormControl,
@@ -56,17 +57,32 @@ interface JobOpportunityContentProps {
     slug: string;
   };
 }
-
 const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
   onViewSalary,
   career,
 }) => {
+  const navigate = useNavigate();
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [marketData, setMarketData] = useState<JobMarketData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const handleViewJobs = () => {
+    const cityData = cities.find((city) => city.name === selectedCity);
+    const jobsData = {
+      jobs:
+        marketData?.newest.filter((job) => job.job_city === selectedCity) || [],
+      jobCount: cityData?.jobCount || 0,
+      maxSalary: cityData?.maxSalary || 0,
+    };
 
+    // 调用回调函数
+    onViewSalary(selectedCountry, selectedCity, jobsData);
+
+    navigate(`/career/${career.slug}/jobs/${selectedCountry}/${selectedCity}`, {
+      state: jobsData,
+    });
+  };
   const fetchMarketData = async () => {
     setIsLoading(true);
     setError(null);
@@ -268,22 +284,7 @@ const JobOpportunityContent: React.FC<JobOpportunityContentProps> = ({
               ))}
           </Grid>
           <Box sx={{ textAlign: 'center', mb: 4 }}>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                const cityData = cities.find(
-                  (city) => city.name === selectedCity
-                );
-                onViewSalary(selectedCountry, selectedCity, {
-                  jobCount: cityData?.jobCount || 0,
-                  maxSalary: cityData?.maxSalary || 0,
-                  jobs:
-                    marketData?.newest.filter(
-                      (job) => job.job_city === selectedCity
-                    ) || [],
-                });
-              }}
-            >
+            <Button variant="outlined" onClick={handleViewJobs}>
               View All Jobs in {selectedCity}
             </Button>
           </Box>
