@@ -21,7 +21,9 @@ const Tools: React.FC = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:5001/roadmap?name=frontend_engineer` //部署需要一个环境变量
+          `${
+            import.meta.env.REACT_APP_BASIC_URL
+          }/roadmap?name=frontend_engineer` //部署需要一个环境变量
         );
         if (!response.ok) {
           throw new Error('Failed to fetch tools data');
