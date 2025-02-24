@@ -1,14 +1,14 @@
 name: ecr push image
-on:
-  workflow_dispatch:
-    inputs:
-      workspace:
-        description: 'ECR push'
-        required: false
-        default: 'default'
-       
 # on:
-#   push:
+#   workflow_dispatch:
+#     inputs:
+#       workspace:
+#         description: 'ECR push'
+#         required: false
+#         default: 'default'
+       
+on:
+  push:
     
 jobs:
   push:
