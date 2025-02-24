@@ -1,7 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  server: {
+    host: '0.0.0.0', // 允许外部访问
+    port: 5173, // 确保端口和 Docker 里一致
+    strictPort: true,
+    cors: true, // 允许跨域
+    hmr: {
+      host: 'programresourcehub.com', // HMR 监听主机
+    },
+  },
+});
