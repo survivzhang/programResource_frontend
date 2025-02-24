@@ -44,6 +44,7 @@ interface JobMarketData {
 }
 
 const API_BASE_URL = `${import.meta.env.VITE_API_SECOND_URL}/api/job_market`;
+console.log(API_BASE_URL);
 
 interface JobOpportunityContentProps {
   onViewSalary: (

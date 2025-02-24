@@ -25,7 +25,7 @@ const LearningPath: React.FC<LearningPathProps> = ({ bgcolor = '#4CAF50' }) => {
   const [pathData, setPathData] = useState<PathData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  console.log(import.meta.env.VITE_API_BASE_URL);
   useEffect(() => {
     const fetchPath = async () => {
       try {
