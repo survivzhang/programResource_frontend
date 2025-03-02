@@ -29,7 +29,7 @@ jobs:
       - name: build and push docker image to ecr
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: program-resource-frontend
+          REPOSITORY: program-resource_frontend
           IMAGE_TAG: latest
         run: |
           cd road_to_programmer
