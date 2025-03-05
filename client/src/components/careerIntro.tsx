@@ -11,7 +11,7 @@ import {
   Button,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CareerNav from '../components/careerNav';
+import CareerNav from './careerNav';
 import { careerPaths } from '../data/careerData';
 
 const CareerIntroPage: React.FC = () => {
